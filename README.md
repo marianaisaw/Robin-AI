@@ -128,7 +128,41 @@ Forwarding    https://abc123.ngrok.io -> http://localhost:5000
 
 ## Deployment to a Public Server
 
-### Option 1: Using a Cloud Provider (Heroku, Railway, Render, etc.)
+### Option 1: Deploying to Vercel (Recommended for Free Tier)
+
+**Note:** Your code is already pushed to GitHub: https://github.com/marianaisaw/Robin-AI
+
+1. **Go to Vercel Dashboard**:
+   - Visit [vercel.com](https://vercel.com) and sign up/login (use GitHub to connect)
+
+2. **Import Your GitHub Repository**:
+   - Click "New Project"
+   - Select "Import Git Repository"
+   - Choose `marianaisaw/Robin-AI`
+   - Click "Import"
+
+3. **Configure Environment Variables**:
+   - In the "Environment Variables" section, add all your variables:
+     - `OPENAI_API_KEY` = your OpenAI API key
+     - `GROUPME_BOT_ID` = your bot ID (84c1834e8bec8ca2dd819b8b20)
+     - `GROUPME_BOT_NAME` = Robin AI
+     - `GROUPME_ACCESS_TOKEN` = your access token
+     - `MAX_TOKENS_PER_DAY` = 50000
+     - `PORT` = 5000 (optional)
+     - `FLASK_ENV` = production (optional)
+   - Click "Deploy"
+
+4. **Update GroupMe Callback URL**:
+   - After deployment, Vercel will give you a URL like: `https://your-app.vercel.app`
+   - Update your GroupMe bot's callback URL to: `https://your-app.vercel.app/webhook`
+   - Go to [GroupMe Developer Portal](https://dev.groupme.com/bots) → Edit your bot → Update callback URL
+
+**Important Vercel Notes:**
+- Free tier has a 10-second function timeout (should be fine for most requests)
+- Your code is already configured with `vercel.json`
+- Environment variables are secure (never commit `.env` file)
+
+### Option 2: Using Other Cloud Providers (Railway, Render, etc.)
 
 1. **Prepare for Deployment**:
 
@@ -138,10 +172,7 @@ Forwarding    https://abc123.ngrok.io -> http://localhost:5000
 2. **Deploy**:
 
    ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git push <your-repo-url>
+   git push origin main  # Already done if using GitHub
    ```
 
 3. **Configure Environment Variables**:
